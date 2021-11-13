@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Youth Smoking"
+author: "Jonathan Huynh, Tengteng Tao, Jinyu Wang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
