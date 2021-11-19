@@ -1,1 +1,22 @@
 # Missing values
+
+Using dataset California Tobacco Health Assessment Tool (https://cthat.org/). 
+
+```{r}
+library(readxl)
+source("resources/plot_missing.R")
+```
+
+```{r}
+county <- read_excel('resources/CTHAT.xlsx', sheet="County", skip=2)
+city <- read_excel('resources/CTHAT.xlsx', sheet="City", skip=2)
+
+# there are some missing filled with dashes, manually change them. 
+county[county == '-'] <- NA
+city[city == '-'] <- NA
+```
+
+```{r, fig.height=10}
+plot_missing(county)
+plot_missing(city)
+```
