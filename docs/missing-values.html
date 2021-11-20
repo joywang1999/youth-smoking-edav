@@ -76,7 +76,11 @@
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#using-dataset-from-fivethirtyeight"><i class="fa fa-check"></i><b>4.1</b> Using Dataset From <code>fivethirtyeight</code></a></li>
+<li class="chapter" data-level="4.2" data-path="missing-values.html"><a href="missing-values.html#california-tobacco-health-assessment-tool-httpscthat.org."><i class="fa fa-check"></i><b>4.2</b> California Tobacco Health Assessment Tool (<span>https://cthat.org/</span>).</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -101,9 +105,55 @@
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
-<p>Using dataset California Tobacco Health Assessment Tool (<a href="https://cthat.org/" class="uri">https://cthat.org/</a>).</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<div id="using-dataset-from-fivethirtyeight" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Using Dataset From <code>fivethirtyeight</code></h2>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="960" /><img src="finalproj_files/figure-html/unnamed-chunk-6-2.png" width="960" /></p>
+<p>Since we do not have any missing value in our data set, we analyze the data set avengers from the package <code>fivethirtyeight</code>. The above missing values plot was created from a data set created by Walk Hickey, an author at FiveThirtyEight. The data set was created to observe the mortality rate of different characters in the Marvel universe who signed on to the join the Avengers.</p>
+<p>According to this figure, we can clear see the missing value pattern of the data set. We can start with the complete cases: As we can see by the dark grey row with the “complete cases” label, there are 10 columns in the data that do not have any missing values. Compared to the missing values pattern, complete cases in this data set are very hard to see.</p>
+<p>However, for the missing value pattern, there is another story. We can see that the most common missing value pattern is having eleven missing variables. The eleven missing variables are: death4, return4, death5, return5, death3, return3, probationary_intro, return2, death2, return1 and notes. There are around 76 rows which have such a pattern in this data set. The second most common missing pattern is missing 9 variables. The nine variables are: death4, return4, death5, return5, death3, return3, probationary_intro, return2 and death2. In the whole data set of 173 rows, there are around 42 rows which have such a pattern. For the whole 21 variables in our data set, there are six variables that are the most common missing variables: death4, return4, death5, return5, death3, and return3. For each of those variables, there are around 160 rows, which is around 10% of the whole data set, missing them. The next three most common missing variables are probationary_Intro, return2, and death2. For each of those three variables, there are around 150 variables, which is around 10% of the whole data set, missing them. For the variable return1 and notes, there are around 100 rows, which is around 8% of the whole data set, missing them separately. For columns that do have missing values, just under 75% of them are only missing one or two values. For the whole 21 variables in our data set, we can see that <code>death4</code>, <code>return4</code>, <code>death5</code>, <code>return5</code>, <code>death3</code>, and <code>return3</code> have the majority of their column values missing. In the context of the problem, it makes sense that if the <code>death#</code> value is missing, then the <code>return#</code> value is also missing because a character cannot return from being dead if they were not killed in the first place. Additionally, we should expect the <code>death#</code> value to be missing for larger numbers (i.e. 3, 4, 5) if the character has not returned from being killed after <code>death1</code> or <code>death2</code>. The <code>probationary_intro</code> column also has a good amount of missing values and after a bit of research into the meaning of this column, we know that this column contains values for the data that a character was given probationary status as an Avenger. Since characters can be introduced as full or reserve Avengers without taking on the probationary status, we would expect this column to be missing values for characters who skipped the probationary period. As a result of this, we would also expect the <code>full_reserve_avengers_intro</code> column to contain values for characters who had a missing value for the <code>probationary_intro</code> column and also for characters who “graduated” from the probationary period and became a full or reserve Avenger. We can see from the plot that this holds true with the <code>full_reserve_avengers_intro</code> column colored as mostly light grey except for missing pattern 13 and 14 where <code>probationary_intro</code> is light grey and for missing pattern 4 where it is purple for both columns. <code>death2</code> and <code>return2</code> have many missing values, but less so than the greater number of deaths and resurrections which makes sense because it is pretty common for a character to die in the Marval universe. For the <code>notes</code> column, the missing values should correspond to characters who have not died since the value is a description of deaths and resurrections. The missing values in the <code>name_alias</code> column are actually a problem for this data set since this column is supposed to full name or alias of the character. Inspecting the data a bit further, it looks like the <code>url</code> values contain the name of the characters so we would be able to fill in these missing values if it was necessary to report statistics about specific characters for an analysis.</p>
+</div>
+<div id="california-tobacco-health-assessment-tool-httpscthat.org." class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> California Tobacco Health Assessment Tool (<a href="https://cthat.org/" class="uri">https://cthat.org/</a>).</h2>
+<p><em>Note: There are multiple sheets in this dataset (California, County, City, DesignatedPlace, Unincorporated, ZCTA) which have different ways of grouping for data in California. In this chapter we are looking at County level and City level.</em></p>
+<p>Besides the avengers’ data set, we also find another two data sets and plot the missing value patterns. For those two data sets, one thing needed to be claim is that those data sets have variables in two forms, the first form is named with variables’ names which is the count of values, the second form is named with number and stands for the percentage of the value in that variable column. Accordingly, for this condition, the two forms of data will both be missing values if either one of them is missing value.</p>
+<pre><code>## # A tibble: 6 x 39
+##   GEOID NAME  `TOTAL POPULATI~ `UNDER 5`   ...5 `5 TO 17`  ...7 `UNDER 21`  ...9
+##   &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+## 1 06001 Alam~          1656754     96849 0.0585    247178 0.149     402545 0.243
+## 2 06003 Alpi~             1039        44 0.0423       157 0.151        236 0.227
+## 3 06005 Amad~            38429      1527 0.0397      4320 0.112       7007 0.182
+## 4 06007 Butt~           225817     12384 0.0548     33055 0.146      58638 0.260
+## 5 06009 Cala~            45514      1902 0.0418      5909 0.130       9012 0.198
+## 6 06011 Colu~            21454      1576 0.0735      4266 0.199       6750 0.315
+## # ... with 30 more variables: WHITE &lt;dbl&gt;, ...11 &lt;dbl&gt;, BLACK &lt;dbl&gt;,
+## #   ...13 &lt;dbl&gt;, ASIAN AND PACIFIC ISLANDER &lt;chr&gt;, ...15 &lt;dbl&gt;,
+## #   HISPANIC / LATINO &lt;dbl&gt;, ...17 &lt;dbl&gt;, ALL OTHER RACES &lt;dbl&gt;, ...19 &lt;dbl&gt;,
+## #   HOUSEHOLD (NUMBER) &lt;dbl&gt;, HOUSEHOLDS RECEIVING SNAP BENEFITS &lt;dbl&gt;,
+## #   ...22 &lt;dbl&gt;, MEDIAN HOUSEHOLD INCOME &lt;dbl&gt;, SCHOOLS (NUMBER) &lt;dbl&gt;,
+## #   HIGH SCHOOLS (NUMBER) &lt;chr&gt;, ...26 &lt;dbl&gt;,
+## #   MIDDLE/JUNIOR HIGH SCHOOL (NUMBER) &lt;chr&gt;, ...28 &lt;dbl&gt;, ...</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
+<p>For the county data set, we can clearly see that this data set only has three missing value patterns and the complete cases are the most common pattern in this data set. For the whole 58 rows data set, around 55 rows are complete cases. There are another three missing value patterns which all have similar probabilities. For those variables which may have missing values, the most common missing variables are RETAILER.WITHIN.500ft_NUMBER and SCHOOLS.WITHIN.500ft_NUMBER. For each of those two variables, in the total 58 rows data set, there are two rows missing them separately. The next several common missing variables are ASIAN.AND.PACIFIC.ISLANDER, HIGH.SCHOOL_NUMBER, SCHOOLS.WITH.A.RETAILER.WITHIN.1.000FT.NUMBER, and RETAILERS.WITH.A.SCHOOLWITHIN1.000FT.NUMBER. For each of those variables, there are one row missing them separately.</p>
+<pre><code>## # A tibble: 6 x 40
+##   `PLACE GNIS COD~ GEOID NAME  `TOTAL POPULATI~ `UNDER 5`   ...6 `5 TO 17`  ...8
+##   &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+## 1 02409663         0600~ Adel~            33660 2917      0.0867      8746 0.260
+## 2 02409666         0600~ Agou~            20533 836       0.0407      3559 0.173
+## 3 02409669         0600~ Alam~            78522 4689      0.0597     11267 0.143
+## 4 02409674         0600~ Alba~            19804 1383      0.0698      3758 0.190
+## 5 02409681         0600~ Alha~            84647 4093      0.0484     10239 0.121
+## 6 02409683         0600~ Alis~            50663 3570      0.0705      8895 0.176
+## # ... with 32 more variables: UNDER 21 &lt;dbl&gt;, ...10 &lt;dbl&gt;, WHITE &lt;dbl&gt;,
+## #   ...12 &lt;dbl&gt;, BLACK &lt;chr&gt;, ...14 &lt;dbl&gt;, ASIAN AND PACIFIC ISLANDER &lt;chr&gt;,
+## #   ...16 &lt;dbl&gt;, HISPANIC / LATINO &lt;dbl&gt;, ...18 &lt;dbl&gt;, ALL OTHER RACES &lt;chr&gt;,
+## #   ...20 &lt;dbl&gt;, HOUSEHOLD (NUMBER) &lt;dbl&gt;,
+## #   HOUSEHOLDS RECEIVING SNAP BENEFITS &lt;chr&gt;, ...23 &lt;dbl&gt;,
+## #   MEDIAN HOUSEHOLD INCOME &lt;chr&gt;, SCHOOLS (NUMBER) &lt;chr&gt;,
+## #   HIGH SCHOOLS (NUMBER) &lt;chr&gt;, ...27 &lt;dbl&gt;, ...</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="960" /></p>
+<p>For the city data set, although the data set have a larger size than the previous data set, complete case is still the most common missing value pattern. For the whole 483 rows, there are around 290 rows which have completely no missing values. For all other missing value patterns, the most common pattern is missing 4 variables, which are SCHOOL.WITH.A. RETAILER.WHITHIN. 500FT.NUMBER, RETAILERS.WITHIN.A. SCHOOL.WITHIN.500FT.NUMBER, SCHOOLS.WITH.A.RETAILER.WITHIN.1.000.NUMBER and RETAILER.WITH.ASCHOOL.WITHIN.1.000_NUMBER. There are around 40 rows that have this pattern in the data set, with 483 rows. Another widespread missing pattern is missing only one variable, HIGH.SCHOOL. NUMBER. There are around 25 rows that have this pattern in the whole 483 rows data set. For all the variables that existed in the data set, the two variables which are highly possible to have missing values are SCHOOL.WITH.A. RETAILER.WHITHIN. 500FT.NUMBER, and RETAILERS.WITHIN.A. SCHOOL.WITHIN.500FT.NUMBER. For each of them, there are 150 rows missing them separately. HIGH.SCHOOL. NUMBER., SCHOOLS.WITH.A.RETAILER.WITHIN.1.000.NUMBER and RETAILER.WITH.ASCHOOL.WITHIN.1.000_NUMBER are the next three most possible variables which may has missing values. For each of those variables, there are around 75 rows have missing values in them separately.</p>
 
+</div>
 </div>
             </section>
 

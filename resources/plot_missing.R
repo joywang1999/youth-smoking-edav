@@ -13,7 +13,8 @@ plot_missing <- function(data, percent = FALSE) {
     rownames_to_column("id") %>%
     gather(key, value, -c(id,count), factor_key = TRUE) %>% 
     group_by(key) %>% 
-    mutate(colcount=sum(value*count)) %>% 
+    mutate(colcount=sum(value*count),
+           total=sum(count)) %>% 
     ungroup() %>% 
     group_by(id) %>% 
     mutate(complete_cases=sum(value)==0) %>% 
@@ -34,8 +35,8 @@ plot_missing <- function(data, percent = FALSE) {
           axis.text.x = element_text(angle=90)) 
   
   g2 <- missing_tidy %>% 
-    distinct(id, count, complete_cases) %>% 
-    { if (percent) mutate(., count=count/sum(count)*100) else . } %>%
+    distinct(id, count, total, complete_cases) %>% 
+    { if (percent) mutate(., count=count/total*100) else . } %>%
     ggplot(aes(x=count, y=id, alpha=complete_cases)) + 
     geom_col(fill="cornflowerblue") + 
     scale_alpha_manual(values = c(0.5, 1)) + 
@@ -48,8 +49,8 @@ plot_missing <- function(data, percent = FALSE) {
           axis.text.y = element_blank())
   
   g3 <- missing_tidy %>% 
-    distinct(key, colcount) %>% 
-    { if (percent) mutate(., colcount=colcount/sum(colcount)*100) else . } %>%
+    distinct(key, colcount, total) %>% 
+    { if (percent) mutate(., colcount=colcount/total*100) else . } %>%
     ggplot(aes(x=key, y=colcount)) + 
     geom_col(fill="cornflowerblue", alpha=0.5) + 
     xlab("") + 
