@@ -1,1 +1,41 @@
 # Data transformation
+
+
+## Preprocessing
+
+The original datasets are in separate spreadsheets from [Historical NYTS Data and Documentation](https://www.cdc.gov/tobacco/data_statistics/surveys/nyts/data/index.html). We selected some same questions across the years and create a new spreadsheet in long format where columns are `Years` and selected questions. Since the datasets are large, we only select 5 years to compare (2016-2020). The codebook are shown below.
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(knitr)
+
+# install.packages("kableExtra")
+library(kableExtra)
+
+codebook <- read_excel("data/nyts-codebook.xlsx")
+
+# still cannot scroll when knit to html
+codebook %>%
+  kable %>%
+  kable_styling("striped", full_width = TRUE) %>%
+  scroll_box()
+```
+
+To form our dataset, we simply append data frames from each year vertically. We also recode some missing responses to NAs to make the dataset consistent with important values and missings. The final spreadsheet looks something similar to below. 
+
+
+
+```{r}
+data <- read_csv("data/nyts_grouped.csv", show_col_types = FALSE)
+
+kable(data[c(1,2,20003,20004,40005,40006,60007,60008,80009,80010),])
+```
+
+
+The preprocessing script is in `resources/data_preprocessing.R`. 
+
+```{r, code = readLines("resources/data_preprocessing.R"), echo=TRUE, eval=FALSE}
+```
+
+

@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Huynh, Tengteng Tao, Jinyu Wang" />
 
 
-<meta name="date" content="2021-11-19" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,8 +53,74 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -75,7 +141,10 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#preprocessing"><i class="fa fa-check"></i><b>3.1</b> Preprocessing</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#using-dataset-from-fivethirtyeight"><i class="fa fa-check"></i><b>4.1</b> Using Dataset From <code>fivethirtyeight</code></a></li>
@@ -107,7 +176,7 @@
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
 <div id="using-dataset-from-fivethirtyeight" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Using Dataset From <code>fivethirtyeight</code></h2>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="960" /><img src="finalproj_files/figure-html/unnamed-chunk-6-2.png" width="960" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="960" /><img src="finalproj_files/figure-html/unnamed-chunk-9-2.png" width="960" /></p>
 <p>Since we do not have any missing value in our data set, we analyze the data set avengers from the package <code>fivethirtyeight</code>. The above missing values plot was created from a data set created by Walk Hickey, an author at FiveThirtyEight. The data set was created to observe the mortality rate of different characters in the Marvel universe who signed on to the join the Avengers.</p>
 <p>According to this figure, we can clear see the missing value pattern of the data set. We can start with the complete cases: As we can see by the dark grey row with the “complete cases” label, there are 10 columns in the data that do not have any missing values. Compared to the missing values pattern, complete cases in this data set are very hard to see.</p>
 <p>However, for the missing value pattern, there is another story. We can see that the most common missing value pattern is having eleven missing variables. The eleven missing variables are: death4, return4, death5, return5, death3, return3, probationary_intro, return2, death2, return1 and notes. There are around 76 rows which have such a pattern in this data set. The second most common missing pattern is missing 9 variables. The nine variables are: death4, return4, death5, return5, death3, return3, probationary_intro, return2 and death2. In the whole data set of 173 rows, there are around 42 rows which have such a pattern. For the whole 21 variables in our data set, there are six variables that are the most common missing variables: death4, return4, death5, return5, death3, and return3. For each of those variables, there are around 160 rows, which is around 10% of the whole data set, missing them. The next three most common missing variables are probationary_Intro, return2, and death2. For each of those three variables, there are around 150 variables, which is around 10% of the whole data set, missing them. For the variable return1 and notes, there are around 100 rows, which is around 8% of the whole data set, missing them separately. For columns that do have missing values, just under 75% of them are only missing one or two values. For the whole 21 variables in our data set, we can see that <code>death4</code>, <code>return4</code>, <code>death5</code>, <code>return5</code>, <code>death3</code>, and <code>return3</code> have the majority of their column values missing. In the context of the problem, it makes sense that if the <code>death#</code> value is missing, then the <code>return#</code> value is also missing because a character cannot return from being dead if they were not killed in the first place. Additionally, we should expect the <code>death#</code> value to be missing for larger numbers (i.e. 3, 4, 5) if the character has not returned from being killed after <code>death1</code> or <code>death2</code>. The <code>probationary_intro</code> column also has a good amount of missing values and after a bit of research into the meaning of this column, we know that this column contains values for the data that a character was given probationary status as an Avenger. Since characters can be introduced as full or reserve Avengers without taking on the probationary status, we would expect this column to be missing values for characters who skipped the probationary period. As a result of this, we would also expect the <code>full_reserve_avengers_intro</code> column to contain values for characters who had a missing value for the <code>probationary_intro</code> column and also for characters who “graduated” from the probationary period and became a full or reserve Avenger. We can see from the plot that this holds true with the <code>full_reserve_avengers_intro</code> column colored as mostly light grey except for missing pattern 13 and 14 where <code>probationary_intro</code> is light grey and for missing pattern 4 where it is purple for both columns. <code>death2</code> and <code>return2</code> have many missing values, but less so than the greater number of deaths and resurrections which makes sense because it is pretty common for a character to die in the Marval universe. For the <code>notes</code> column, the missing values should correspond to characters who have not died since the value is a description of deaths and resurrections. The missing values in the <code>name_alias</code> column are actually a problem for this data set since this column is supposed to full name or alias of the character. Inspecting the data a bit further, it looks like the <code>url</code> values contain the name of the characters so we would be able to fill in these missing values if it was necessary to report statistics about specific characters for an analysis.</p>
@@ -132,7 +201,7 @@
 ## #   ...22 &lt;dbl&gt;, MEDIAN HOUSEHOLD INCOME &lt;dbl&gt;, SCHOOLS (NUMBER) &lt;dbl&gt;,
 ## #   HIGH SCHOOLS (NUMBER) &lt;chr&gt;, ...26 &lt;dbl&gt;,
 ## #   MIDDLE/JUNIOR HIGH SCHOOL (NUMBER) &lt;chr&gt;, ...28 &lt;dbl&gt;, ...</code></pre>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="960" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
 <p>For the county data set, we can clearly see that this data set only has three missing value patterns and the majority of the data comprised of complete rows of data (complete cases are the most common pattern). For the whole 58 rows data set, around 55 rows are complete cases. There are another three missing value patterns which all have similar probabilities. For those variables which may have missing values, the most common missing variables are RETAILER.WITHIN.500ft_NUMBER and SCHOOLS.WITHIN.500ft_NUMBER. For each of those two variables, in the total 58 rows data set, there are two rows missing them separately. The next several common missing variables are ASIAN.AND.PACIFIC.ISLANDER, HIGH.SCHOOL_NUMBER, SCHOOLS.WITH.A.RETAILER.WITHIN.1.000FT.NUMBER, and RETAILERS.WITH.A.SCHOOLWITHIN1.000FT.NUMBER. For each of those variables, there are one row missing them separately.</p>
 <pre><code>## # A tibble: 6 x 40
 ##   `PLACE GNIS COD~ GEOID NAME  `TOTAL POPULATI~ `UNDER 5`   ...6 `5 TO 17`  ...8
@@ -150,7 +219,7 @@
 ## #   HOUSEHOLDS RECEIVING SNAP BENEFITS &lt;chr&gt;, ...23 &lt;dbl&gt;,
 ## #   MEDIAN HOUSEHOLD INCOME &lt;chr&gt;, SCHOOLS (NUMBER) &lt;chr&gt;,
 ## #   HIGH SCHOOLS (NUMBER) &lt;chr&gt;, ...27 &lt;dbl&gt;, ...</code></pre>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="960" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="960" /></p>
 <p>For the city data set, although the data set have a larger size than the previous data set, the majority of data is still comprised of complete rows of data (complete cases are the most common pattern). For the whole 483 rows, there are around 290 rows which have completely no missing values. For all other missing value patterns, the most common pattern is missing 4 variables, which are SCHOOL.WITH.A. RETAILER.WHITHIN. 500FT.NUMBER, RETAILERS.WITHIN.A. SCHOOL.WITHIN.500FT.NUMBER, SCHOOLS.WITH.A.RETAILER.WITHIN.1.000.NUMBER and RETAILER.WITH.ASCHOOL.WITHIN.1.000_NUMBER. There are around 40 rows that have this pattern in the data set, with 483 rows. Another widespread missing pattern is missing only one variable, HIGH.SCHOOL. NUMBER. There are around 25 rows that have this pattern in the whole 483 rows data set. For all the variables that existed in the data set, the two variables which are highly possible to have missing values are SCHOOL.WITH.A. RETAILER.WHITHIN. 500FT.NUMBER, and RETAILERS.WITHIN.A. SCHOOL.WITHIN.500FT.NUMBER. For each of them, there are 150 rows missing them separately. HIGH.SCHOOL. NUMBER., SCHOOLS.WITH.A.RETAILER.WITHIN.1.000.NUMBER and RETAILER.WITH.ASCHOOL.WITHIN.1.000_NUMBER are the next three most possible variables which may has missing values. For each of those variables, there are around 75 rows have missing values in them separately.</p>
 
 </div>
