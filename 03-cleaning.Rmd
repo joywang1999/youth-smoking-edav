@@ -8,18 +8,18 @@ The original datasets are in separate spreadsheets from [Historical NYTS Data an
 ```{r}
 library(tidyverse)
 library(readxl)
-library(knitr)
 
-# install.packages("kableExtra")
-library(kableExtra)
+# install.packages("DT")
+library(DT)
 
 codebook <- read_excel("data/nyts-codebook.xlsx")
 
-# still cannot scroll when knit to html
-codebook %>%
-  kable %>%
-  kable_styling("striped", full_width = TRUE) %>%
-  scroll_box()
+datatable(codebook, 
+          options = list(pageLength=50, scrollX='400px',
+                         autoWidth = TRUE,
+                         columnDefs = list(list(width = '5px', targets = 0),
+                                           list(width = '150px', targets = "_all"))), 
+          filter = 'top', rownames = FALSE)
 ```
 
 To form our dataset, we simply append data frames from each year vertically. We also recode some missing responses to NAs to make the dataset consistent with important values and missings. The final spreadsheet looks something similar to below. 
@@ -29,7 +29,12 @@ To form our dataset, we simply append data frames from each year vertically. We 
 ```{r}
 data <- read_csv("data/nyts_grouped.csv", show_col_types = FALSE)
 
-kable(data[c(1,2,20003,20004,40005,40006,60007,60008,80009,80010),])
+datatable(data[c(1,2,20003,20004,40005,40006,60007,60008,80009,80010),], 
+          options = list(pageLength=50, scrollX='400px',
+                         autoWidth = TRUE,
+                         columnDefs = list(list(width = '5px', targets = 0),
+                                           list(width = '150px', targets = "_all"))), 
+          filter = 'top', rownames = FALSE)
 ```
 
 
