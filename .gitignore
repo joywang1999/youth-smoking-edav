@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# data files
+data/NYTS
