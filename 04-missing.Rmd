@@ -6,6 +6,7 @@ library(ggplot2)
 source("resources/plot_missing.R")
 ```
 
+Missing values existed in almost every data set. To analysis missing value patterns, we created a plot_missing() function. By inputting a data set into this function, we can easily see all missing patterns in our data set. We can find the most common missing pattern and see which variable is the most common missing variable. Before analyzing our data set, let’s do some example analysis by using data sets from packages as input for our function and vividly explaining their corresponding result. 
 
 ## Using Dataset From `fivethirtyeight` 
 
@@ -16,7 +17,7 @@ plot_missing(avengers, percent = FALSE)
 plot_missing(avengers, percent = TRUE)
 ```
 
-Since we do not have any missing value in our data set, we analyze the data set avengers from the package `fivethirtyeight`. The above missing values plot was created from a data set created by Walk Hickey, an author at FiveThirtyEight. The data set was created to observe the mortality rate of different characters in the Marvel universe who signed on to the join the Avengers.
+For our first example, we analyze the data set avengers from the package `fivethirtyeight`. The above missing values plot was created from a data set created by Walk Hickey, an author at FiveThirtyEight. The data set was created to observe the mortality rate of different characters in the Marvel universe who signed on to the join the Avengers.
 
 According to this figure, we can clear see the missing value pattern of the data set. We can start with the complete cases: As we can see by the dark grey row with the "complete cases" label, there are 10 columns in the data that do not have any missing values. Compared to the missing values pattern, complete cases in this data set are very hard to see. 
 
@@ -57,3 +58,69 @@ plot_missing(city, percent = TRUE)
 ```
 
 For the city data set, although the data set have a larger size than the previous data set, the majority of data is still comprised of complete rows of data (complete cases are the most common pattern). For the whole 483 rows, there are around 290 rows which have completely no missing values. For all other missing value patterns, the most common pattern is missing 4 variables, which are SCHOOL.WITH.A. RETAILER.WHITHIN. 500FT.NUMBER, RETAILERS.WITHIN.A. SCHOOL.WITHIN.500FT.NUMBER, SCHOOLS.WITH.A.RETAILER.WITHIN.1.000.NUMBER and RETAILER.WITH.ASCHOOL.WITHIN.1.000_NUMBER. There are around 40 rows that have this pattern in the data set, with 483 rows. Another widespread missing pattern is missing only one variable, HIGH.SCHOOL. NUMBER. There are around 25 rows that have this pattern in the whole 483 rows data set. For all the variables that existed in the data set, the two variables which are highly possible to have missing values are SCHOOL.WITH.A. RETAILER.WHITHIN. 500FT.NUMBER, and RETAILERS.WITHIN.A. SCHOOL.WITHIN.500FT.NUMBER. For each of them, there are 150 rows missing them separately. HIGH.SCHOOL. NUMBER., SCHOOLS.WITH.A.RETAILER.WITHIN.1.000.NUMBER and RETAILER.WITH.ASCHOOL.WITHIN.1.000_NUMBER are the next three most possible variables which may has missing values. For each of those variables, there are around 75 rows have missing values in them separately. 
+
+
+
+## Youth smoking data set
+
+Now, we use our data as input and analyze its missing values patterns. 
+Before plotting the missing values pattern, we first need to delete several questions from our data set. Among our data set, several questions, like what race you are, and each race represented a single question, which only allows our participants to choose one race and lead to all other questions missing values, should not be considered into our missing values pattern. Thus, we delete those questions before running the plotting function. Another thing that needs to be mentioned is that we will analyze the data set year by year since our data set is extensive. By doing this, the final result is more precise and easy to understand. 
+
+
+```{r, fig.height = 10}
+data <- read_csv("data/nyts_grouped.csv", show_col_types = FALSE)
+
+
+
+data_wtrace <- data[-c(5:14)]
+
+colnames(data_wtrace) <- c('year', 'q1', 'q2', 'q3', 'q22', 'q23', 'q24', 'q25', 'q26', 'q27', 'q29', 'q30',
+                    'q31', 'q32', 'q33', 'q34', 'q35', 'q36', 'q44', 'q45', 'q17', 'q6')
+data2020 <- subset(data_wtrace, year == '2020')
+plot_missing(data2020, percent = TRUE)
+plot_missing(data2020, percent = FALSE)
+```
+
+Let’s first look at the 2020 year’s data set. By running the function, we find the most common missing variable is Q29, which, according to the codebook, is the question ’During the past 30 days, what brand of cigarettes did you usually smoke’. This question is almost missed in every single row. The most common missing value pattern for the 2020 data set is missing “q29, q27, q30, q45,q36, q26, q23, q24, q25”, which correspondingly are “During the past 30 days, what brand of cigarettes did you usually smoke?”, “During the past 30 days, on the days you smoked, about how many cigarettes did you smoke per day? A pack usually has 20 cigarettes in it.”, “Menthol cigarettes are cigarettes that taste like mint. During the past 30 days, were the cigarettes that you usually smoked menthol?”, “How old were you when you first used chewing tobacco, snuff, or dip, even just a small amount?”, “How old were you when you first smoked a cigar, cigarillo, or little cigar, even one or two puffs?”, “When was the last time you smoked a cigeratte, even one or two puffs? (Please choose the first answer that fits)”, “How old were you when you first smoked a cigarette, even one or two puffs?”, “About how many cigarettes have you smoked in your entire life?”, and “During the past 30 days, on how many days did you smoke cigarettes?”. For the whole 2020 data set, almost 70 percent rows have missing values for those variables. 
+
+
+
+
+```{r, fig.height = 10}
+data2019 <- subset(data_wtrace, year == '2019')
+plot_missing(data2019, percent = TRUE)
+plot_missing(data2019, percent = FALSE)
+```
+
+Now let us look at the 2019 data set. We can find that the most common missing variable are q27, q30, q29, which are “During the past 30 days, on the days you smoked, about how many cigarettes did you smoke per day? A pack usually has 20 cigarettes in it.”, “Menthol cigarettes are cigarettes that taste like mint. During the past 30 days, were the cigarettes you usually smoked menthol?”, and “During the past 30 days, what brand of cigarettes did you usually smoke?”. There is around 90 percent of the rows are missing those values. The most common missing value pattern is missing q27, q30, q29, q45, q36, q26, q24, q25, q23. Which are “During the past 30 days, on the days you smoked, about how many cigarettes did you smoke per day? A pack usually has 20 cigarettes in it.”, “Menthol cigarettes are cigarettes that taste like mint. During the past 30 days, were the cigarettes you usually smoked menthol?”, “During the past 30 days, what brand of cigarettes did you usually smoke?”, “How old were you when you first used chewing tobacco, snuff, or dip, even just a small amount?”, “How old were you when you first smoked a cigar, cigarillo, or little cigar, even one or two puffs?”, “When was the last time you smoked a cigarette, even one or two puffs? (Please choose the first answer that fits)”, “About how many cigarettes have you smoked in your entire life?”, “During the past 30 days, on how many days did you smoke cigarettes?”, and “How old were you when you first smoked a cigarette, even one or two puffs?”. There are around 60 percent of rows have such a missing pattern.
+
+
+
+
+```{r, fig.height = 10}
+data2018 <- subset(data_wtrace, year == '2018')
+plot_missing(data2018, percent = TRUE)
+plot_missing(data2018, percent = FALSE)
+```
+
+For the 2018 data set, the missing values patterns have a huge difference with 2019 and 2020. For this year, the complete case is the most common pattern. There is around 80 percent of rows have such a pattern. This year's most common missing variable is q44, which is the question “Have you ever used chewing tobacco, snuff, or dip, even just a small amount?”. Around 420 rows in the 2018 data set have missing values on this variable.
+
+
+```{r, fig.height = 10}
+data2017 <- subset(data_wtrace, year == '2017')
+plot_missing(data2017, percent = TRUE)
+plot_missing(data2017, percent = FALSE)
+```
+
+For the 2017 data set, the pattern is very similar to 2018. The complete case is the most common missing value pattern, and around 85 percent of rows have such a pattern. The most common missing variable here is also q44, which is “Have you ever used chewing tobacco, snuff, or dip, even just a small amount?”, and there are around 300 rows have missing values on this variable. 
+
+```{r, fig.height = 10}
+data2016 <- subset(data_wtrace, year == '2016')
+plot_missing(data2016, percent = TRUE)
+plot_missing(data2016, percent = FALSE)
+```
+
+For the 2016 data set, the most common missing values pattern is still the complete case, and there is around 85 percent of rows have such a pattern. The most common missing variable here is q17, which is “Have you ever been curious about using an e-cigarette?”, and there are around 500 rows that have missing values on this variable. 
+
+In conclusion, by observing the overall five years missing values patterns’ plot, we can find that participants in 2019 and 2020 do not pay enough attention to the smoking issue. For these two years, there are many questions with missing values, and the whole data set has clear missing value patterns, which can be interpreted as those participates do not take the smoking problems seriously at all, they do not remember what brand of cigarettes they are smoking, they do not remember when is the first time they smoke, they do not remember how many cigarettes they smoke in the past month… All of those just showed how indifferent attitudes they have when asked about their smoking issue. Those indifferent attitudes did not even exist in 2018, 2017, and 2016, which clearly showed how the youth smoking problem became more and more serious those days.
+
