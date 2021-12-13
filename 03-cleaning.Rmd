@@ -3,7 +3,9 @@
 
 ## Preprocessing
 
-The original datasets are in separate spreadsheets from [Historical NYTS Data and Documentation](https://www.cdc.gov/tobacco/data_statistics/surveys/nyts/data/index.html). We selected some same questions across the years and create a new spreadsheet in long format where columns are `Years` and selected questions. Since the datasets are large, we only select 5 years to compare (2016-2020). The codebook are shown below.
+The original datasets are in separate spreadsheets from [Historical NYTS Data and Documentation](https://www.cdc.gov/tobacco/data_statistics/surveys/nyts/data/index.html). We selected some same questions across the years and create a new spreadsheet in long format where columns are `Years` and selected questions. Since the datasets are large, we only select 5 years to compare (2016-2020). 
+Here is our codebook.
+
 
 ```{r}
 library(tidyverse)
@@ -22,8 +24,38 @@ datatable(codebook,
           filter = 'top', rownames = FALSE)
 ```
 
-To form our dataset, we simply append data frames from each year vertically. We also recode some missing responses to NAs to make the dataset consistent with important values and missings. The final spreadsheet looks something similar to below. 
 
+To form our dataset, we simply append data frames from each year vertically. We also recode some missing responses to NAs to make the dataset consistent with important values and missings. However, in original data, each entries are integers like 0, 1, ..., they provided an additional codebook that match integer values to actual answer. Thus we have another spreadsheet which matches entries, year, and actual answer to generate final dataset. 
+
+
+
+```{r}
+factoring <- read_excel("data/nyts_factoring.xlsx")
+
+datatable(factoring, 
+          options = list(pageLength=50, scrollX='400px',
+                         autoWidth = TRUE,
+                         columnDefs = list(list(width = '5px', targets = c(0,1)),
+                                           list(width = '150px', targets = "_all"))), 
+          filter = 'top', rownames = FALSE)
+```
+
+
+To summarize our data transformation, we turned the original dataset (head of year 2020 shown below), 
+
+```{r}
+y2020 <- read_excel("data/NYTS/nyts2020.xlsx", n_max=10)
+
+datatable(y2020, 
+          options = list(pageLength=50, scrollX='400px',
+                         autoWidth = TRUE,
+                         columnDefs = list(list(width = '5px', targets = 0),
+                                           list(width = '150px', targets = "_all"))), 
+          filter = 'top', rownames = FALSE)
+```
+
+
+to a final spreadsheet looks something similar to below.
 
 
 ```{r}
