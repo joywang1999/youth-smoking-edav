@@ -66,16 +66,54 @@ For the city data set, although the data set have a larger size than the previou
 Now, we use our data as input and analyze its missing values patterns. 
 Before plotting the missing values pattern, we first need to delete several questions from our data set. Among our data set, several questions, like what race you are, and each race represented a single question, which only allows our participants to choose one race and lead to all other questions missing values, should not be considered into our missing values pattern. Thus, we delete those questions before running the plotting function. Another thing that needs to be mentioned is that we will analyze the data set year by year since our data set is extensive. By doing this, the final result is more precise and easy to understand. 
 
+Here is a reference of questions. 
+
+```{r, eval=FALSE, echo=TRUE}
+ [1] "How old are you?"                                                                                                                                                                       
+ [2] "What is your sex?"                                                                                                                                                                      
+ [3] "What grade are you in?"                                                                                                                                                                 
+ [4] "Have you ever smoked a cigarette, even one or two puffs?"                                                                                                                               
+ [5] "How old were you when you first smoked a cigarette, even one or two puffs?"                                                                                                             
+ [6] "About how many cigarettes have you smoked in your entire life?"                                                                                                                         
+ [7] "During the past 30 days, on how many days did you smoke cigarettes?"                                                                                                                    
+ [8] "When was the last time you smoked a cigeratte, even one or two puffs? (Please choose the first answer that fits)"                                                                       
+ [9] "During the past 30 days, on the days you smoked, about how many cigarettes did you smoke per day? A pack usually has 20 cigarettes in it."                                              
+[10] "During the past 30 days, what brand of cigarettes did you usually smoke?"                                                                                                               
+[11] "Menthol cigarettes are cigarettes that taste like mint. During the past 30 days, were the cigarettes that you usually smoked menthol?"                                                  
+[12] "Have you ever been curious about smoking a cigarette?"                                                                                                                                  
+[13] "Do you think that you will try a cigarette soon?"                                                                                                                                       
+[14] "Do you think that you will smoke a cigarette in the next year?"                                                                                                                         
+[15] "If one of your best friends were to offer you a cigarette, would you smoke it?"                                                                                                         
+[16] "Have you ever smoked a cigar, cigarillo, or little cigar, even one or two puffs?"                                                                                                       
+[17] "How old were you when you first smoked a cigar, cigarillo, or little cigar, even one or two puffs?"                                                                                     
+[18] "Have you ever used chewing tobacco, snuff, or dip, even just a small amount?"                                                                                                           
+[19] "How old were you when you first used chewing tobacco, snuff, or dip, even just a small amount?"                                                                                         
+[20] "Have you ever been curious about using an e-cigarette?"                                                                                                                                 
+[21] "Have you ever used an e-cigarette, even once or twice?"                                                                                                                                 
+[22] "How old were you when you first used an e-cigarette, even once or twice?"                                                                                                               
+[23] "When you are using the Internet, how often do you see ads or promotions for cigarettes or other tobacco products?"                                                                      
+[24] "When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for cigarettes or other tobacco products?"                                      
+[25] "When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for cigarettes or other tobacco products?"
+[26] "When you are using the Internet, how often do you see ads or promotions for e-cigarettes?"                                                                                              
+[27] "When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for e-cigarettes?"                                                              
+[28] "When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for e-cigarettes?"                        
+[29] "How often do you see posts related to e-cigarettes when you go on social media (such as YouTube, Instagram, Snapchat, Twitter, or Facebook)?"        
+
+```
+
 
 ```{r, fig.height = 10}
 data <- read_csv("data/nyts_grouped.csv", show_col_types = FALSE)
 
-
-
 data_wtrace <- data[-c(5:14)]
 
-colnames(data_wtrace) <- c('year', 'q1', 'q2', 'q3', 'q22', 'q23', 'q24', 'q25', 'q26', 'q27', 'q29', 'q30',
-                    'q31', 'q32', 'q33', 'q34', 'q35', 'q36', 'q44', 'q45', 'q17', 'q6')
+columns <- c("year")
+
+for (i in 1:29) {
+  columns <- cbind(columns, paste0("Q", i))
+}
+
+colnames(data_wtrace) <- columns
 data2020 <- subset(data_wtrace, year == '2020')
 plot_missing(data2020, percent = TRUE)
 plot_missing(data2020, percent = FALSE)
