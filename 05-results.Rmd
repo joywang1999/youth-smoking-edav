@@ -6,7 +6,13 @@ library(ggplot2)
 source("resources/plot_missing.R")
 ```
 
+## Race 
+
 ```{r}
+data <- read_csv("data/nyts_grouped.csv", show_col_types = FALSE)
+```
+
+```{r, eval=FALSE}
 sum(data[5], na.rm = TRUE) # Not Hispanic or Latino
 sum(data[6], na.rm = TRUE) # Mexican
 sum(data[7], na.rm = TRUE) # Puerto Rico
@@ -19,7 +25,7 @@ sum(data[13], na.rm = TRUE) # Native Hawaiian or Other Pacific Islander
 sum(data[14], na.rm = TRUE) # White
 ```
 
-```{r}
+```{r, eval=FALSE}
 sum(data[5][data[15] == 1], na.rm = TRUE) # Not Hispanic or Latino
 sum(data[6][data[15] == 1], na.rm = TRUE) # Mexican
 sum(data[7][data[15] == 1], na.rm = TRUE) # Puerto Rico
@@ -58,6 +64,8 @@ race_bar <- race_df %>%
 
 race_bar
 ```
+
+
 As we can see by the breakdown by race/ethnicity above, almost 1 in every 4 of the youth that identify as Cuban have tried smoking. The percentage of youth identifying as Cuban who have tried smoking is over twice as much as the percentage of youth who identify as Asian. The percentage of the youth who identify as Hispanic or Latino and have tried smoking is about 17%, which is greater than most other race/ethnicities other than American Indian or Alaska Native. Approxmately 1 in 5 of the youth who identity as American Indian or Alaska Native have tried smoking. 
 
 
