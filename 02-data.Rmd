@@ -1,2 +1,21 @@
 # Data sources
 
+Tobacco use had been more and more serious problem among youth these years. On Dec. 20, 2019, the federal minimum age for sale of tobacco product in the U.S. were raised from 18 to 21 years old. Still, youth in U.S. have some access to tobacco products. The main aim for our project is to find a pattern between youth and to provide a prevention on tobacco usage. 
+
+The primary data sources we will use for this project is [National Youth Tobacco Survey](https://www.cdc.gov/tobacco/data_statistics/surveys/nyts/data/index.html) collected from CDC. 
+NYTS has survey data from 1999-2020, due to the large sample size, we will only focus on data from 2016-2020 in this project.
+
+## National Youth Tobacco Survey (NYTS)
+
+Dataset used: `nyts-2020.xlsx`, `nyts-2019.xlsx`, `nyts-2018.xlsx`, `nyts-2017.xlsx`, `nyts-2016.xlsx`.
+
+The National Youth Tobacco Survey provides us with survey data from young
+people starting at the age of nine years old up through a 19 & older option. The
+survey asks extensive questions related to tobacco including usage patterns,
+recency, brand loyalty, and family/friend usage patterns. We intend to use
+combinations of these answers to identify the patterns and trends of young
+people. The survey is administered annually so we will be able to compare the
+results of multiple years to see how trends have changed, if at all.
+
+Issues we encountered:
+- Although it would be nice to cross compare the trends over 20 years, survey questions and format of answers vary from year to year. Our solution is that we only selected \~30 important questions (columns) that appears in all 5 years related to our aim in this project. Also, dataset for one year have \~15000 rows and \~1000 columns, after preprocessing, we are dealing with (\~100000, 40), which is much smaller and precise dataset. 

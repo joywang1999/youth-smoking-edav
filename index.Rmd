@@ -7,3 +7,14 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+
+There are three main questions we are interested in pursuing:
+
+- What are the most common reasons that young people start using
+tobacco/e-cigarettes and how prevalent is tobacco/e-cigarette usage in young
+people?
+- Is there a demographic difference (i.e. race, educational level) between
+tobacco/e-cigarettes usage in young people? Or some other social factor
+difference?
+- Based on usage and adoption trends, should there be more strict policies to
+prevent or deter young people from tobacco/e-cigarette usage?
