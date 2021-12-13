@@ -1,1 +1,64 @@
 # Results
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+source("resources/plot_missing.R")
+```
+
+```{r}
+sum(data[5], na.rm = TRUE) # Not Hispanic or Latino
+sum(data[6], na.rm = TRUE) # Mexican
+sum(data[7], na.rm = TRUE) # Puerto Rico
+sum(data[8], na.rm = TRUE) # Cuba
+sum(data[9], na.rm = TRUE) # Another Hispanic or Latino
+sum(data[10], na.rm = TRUE) # American Indian or Alaska Native
+sum(data[11], na.rm = TRUE) # Asian
+sum(data[12], na.rm = TRUE) # Black or African American
+sum(data[13], na.rm = TRUE) # Native Hawaiian or Other Pacific Islander
+sum(data[14], na.rm = TRUE) # White
+```
+
+```{r}
+sum(data[5][data[15] == 1], na.rm = TRUE) # Not Hispanic or Latino
+sum(data[6][data[15] == 1], na.rm = TRUE) # Mexican
+sum(data[7][data[15] == 1], na.rm = TRUE) # Puerto Rico
+sum(data[8][data[15] == 1], na.rm = TRUE) # Cuba
+sum(data[9][data[15] == 1], na.rm = TRUE) # Another Hispanic or Latino
+sum(data[10][data[15] == 1], na.rm = TRUE) # American Indian or Alaska Native
+sum(data[11][data[15] == 1], na.rm = TRUE) # Asian
+sum(data[12][data[15] == 1], na.rm = TRUE) # Black or African American
+sum(data[13][data[15] == 1], na.rm = TRUE) # Native Hawaiian or Other Pacific Islander
+sum(data[14][data[15] == 1], na.rm = TRUE) # White
+```
+
+```{r}
+race_ethnicity = c('Mexican', 'Puerto Rico', 'Cuba', 'Another Hispanic or Latino', 'American Indian or Alaska Native', 'Asian', 'Black or African American', 'Native Hawaiian or Other Pacific Islander', 'White')
+
+total_race_count = c(13827, 2895, 1081, 10074, 7182, 6684, 18918, 2912, 56445)
+
+smoked_per_race = c(2522, 508, 267, 1523, 1502, 747, 2958, 503, 9882)
+
+race_df = data.frame(race_ethnicity, total_race_count, smoked_per_race)
+```
+
+```{r}
+race_df <- race_df %>%
+  mutate(percent_smoking = smoked_per_race / total_race_count) %>%
+  arrange(percent_smoking)
+
+race_bar <- race_df %>%
+  #arrange(percent_smoking) %>% 
+  ggplot(aes(x=reorder(race_ethnicity, desc(percent_smoking)), y=percent_smoking)) +
+  geom_bar(color='blue', fill = 'lightblue', stat='identity') +
+  theme(axis.text.x = element_text(angle = 45, hjust=1)) +
+  xlab('Race/Ethnicity') +
+  ylab('% Tried Smoking') +
+  ggtitle('Percentage of Youth That Has Tried Smoking by Race/Ethnicity')
+
+race_bar
+```
+As we can see by the breakdown by race/ethnicity above, almost 1 in every 4 of the youth that identify as Cuban have tried smoking. The percentage of youth identifying as Cuban who have tried smoking is over twice as much as the percentage of youth who identify as Asian. The percentage of the youth who identify as Hispanic or Latino and have tried smoking is about 17%, which is greater than most other race/ethnicities other than American Indian or Alaska Native. Approxmately 1 in 5 of the youth who identity as American Indian or Alaska Native have tried smoking. 
+
+
+
