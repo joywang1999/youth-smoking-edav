@@ -3,14 +3,143 @@
 ```{r}
 library(tidyverse)
 library(ggplot2)
-source("resources/plot_missing.R")
 ```
 
-## Race 
 
 ```{r}
 data <- read_csv("data/nyts_grouped.csv", show_col_types = FALSE)
 ```
+
+## Advertisement 
+
+It is not surprising that tobacco advertisements appears in everyday lives. One possible reason that youth start using tobacco products are because of ads
+
+```{r, fig.width=10, fig.height=7}
+
+internet_levels <- c("I do not use the Internet", "Never", "Rarely", "Sometimes", "Most of the time", "Always")
+
+data %>% 
+  select(c(1, 34, 37)) %>% 
+  pivot_longer(-1, names_to="Questions", values_to="Response") %>% 
+  mutate(Response = factor(Response, levels = rev(internet_levels))) %>% 
+  group_by(Year, Questions, Response) %>% 
+  summarise(count = n(), .groups = "drop") %>% 
+  group_by(Year, Questions) %>% 
+  mutate(percent = count/sum(count)) %>% 
+  drop_na() %>% 
+  ggplot(aes(x=Year, y=percent, color=Response)) + 
+  geom_line(size=1) + geom_point() +
+  facet_wrap(~Questions, dir="v") + 
+  scale_color_viridis_d() +
+  ggtitle("Comparison of How Often Youth See Ads on the Internet for cigarettes and e-cigarettes") + 
+  theme(legend.position = "bottom")
+```
+
+
+
+```{r, fig.width=10, fig.height=7}
+
+store_levels <- c("I never go to a convenience store, supermarket, or gas station", "Never", "Rarely", "Sometimes", "Most of the time", "Always")
+
+data %>% 
+  select(c(1, 35, 38)) %>% 
+  pivot_longer(-1, names_to="Questions", values_to="Response") %>% 
+  mutate(Response = factor(Response, levels = rev(store_levels))) %>% 
+  group_by(Year, Questions, Response) %>% 
+  summarise(count=n(), .groups = "drop") %>%
+  group_by(Year, Questions) %>% 
+  mutate(percent = count/sum(count)) %>% 
+  drop_na() %>% 
+  ggplot(aes(x=Year, y=percent, color=Response)) + 
+  geom_line(size=1) + geom_point() +
+  facet_wrap(~Questions, dir="v") + 
+  scale_color_viridis_d() + 
+  ggtitle("Comparison of How Often Youth See Ads on Stores for cigarettes and e-cigarettes") + 
+  theme(legend.position = "bottom")
+```
+
+```{r, fig.width=10, fig.height=7}
+
+streaming_levels <- c("I do not watch TV or streaming services, or go to the movies", "Never", "Rarely", "Sometimes", "Most of the time", "Always")
+
+data %>% 
+  select(c(1, 36, 39)) %>% 
+  pivot_longer(-1, names_to="Questions", values_to="Response") %>% 
+  mutate(Response = factor(Response, levels = rev(streaming_levels))) %>% 
+  group_by(Year, Questions, Response) %>% 
+  summarise(count=n(), .groups = "drop") %>%
+  group_by(Year, Questions) %>% 
+  mutate(percent = count/sum(count)) %>% 
+  drop_na() %>% 
+  ggplot(aes(x=Year, y=percent, color=Response)) + 
+  geom_line(size=1) + geom_point() +
+  facet_wrap(~Questions, dir="v") + 
+  scale_color_viridis_d() +
+  ggtitle("Comparison of How Often Youth See Ads on TV or Streaming Services for cigarettes and e-cigarettes") + 
+  theme(legend.position = "bottom")
+```
+
+E-cigarettes are becoming popular in recent years as they have some fruity/sweet flavor comparing to traditional tobacco. 
+We could clearly discover a trend that ads for e-cigarettes are increasing on the Internet and stores but not on TV or streaming services. The possible reason for the difference is that there are stricter control on what would be on TV than on the Internet and stores since the latter are the primary source where people gets tobacco products. 
+
+Looking at the TV or streaming services plot, we can also relate the decreasing of tobacco/e-cigarettes ads to the legislation that legal age for tobacco products were raised from 18 to 21 years old in 2019. 
+
+
+```{r, fig.width=10, fig.height=10}
+
+age_levels <- c("9 years old", "10 years old", "11 years old", "12 years old", "13 years old", "14 years old", 
+                "15 years old", "16 years old", "17 years old", "18 years old", "19 years old or older")
+
+grades_levels <- c("6th", "7th", "8th", "9th", "10th", "11th", "12th", "Ungraded or other grade")
+
+ads_labeller <- c(
+  `When you are using the Internet, how often do you see ads or promotions for cigarettes or other tobacco products?`="Internet, cigarettes or other tobacco products",
+  `When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for cigarettes or other tobacco products?`="Stores, cigarettes or other tobacco products",
+  `When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for cigarettes or other tobacco products?`="TV or streaming, cigarettes or other tobacco products",
+  `When you are using the Internet, how often do you see ads or promotions for e-cigarettes?`="Internet, e-cigarettes",
+  `When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for e-cigarettes?`="Stores, e-cigarettes",
+  `When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for e-cigarettes?`="TV or streaming, e-cigarettes"
+)
+
+age_grade_data <- data %>% 
+  select(c(1, 2, 4, 34:39)) %>% 
+  pivot_longer(-c(1,2,3), names_to="Questions", values_to="Response") %>% 
+  rename(Age = 2, Grades = 3) %>% 
+  mutate(Age = factor(Age, levels = age_levels),
+         Grades = factor(Grades, levels = grades_levels))
+
+age_grade_data %>%
+  group_by(Year, Age, Questions, Response) %>% 
+  summarise(count=n(), .groups = "drop") %>%
+  group_by(Year, Age, Questions) %>% 
+  mutate(percent = count/sum(count)) %>% 
+  filter(Response == "Always") %>%
+  drop_na() %>% 
+  ggplot(aes(x=Year, y=percent, color=Age)) + 
+  geom_line(size=1) + geom_point() +
+  facet_wrap(~Questions, dir="v", ncol=3, labeller = as_labeller(ads_labeller)) + 
+  scale_color_viridis_d() +
+  ggtitle("Comparison of How Often Youth See for cigarettes and e-cigarettes by Age") +
+  theme(legend.position = "bottom")
+  
+age_grade_data %>%
+  group_by(Year, Grades, Questions, Response) %>% 
+  summarise(count=n(), .groups = "drop") %>%
+  group_by(Year, Grades, Questions) %>% 
+  mutate(percent = count/sum(count)) %>% 
+  filter(Response == "Always") %>%
+  drop_na() %>% 
+  ggplot(aes(x=Year, y=percent, color=Grades)) + 
+  geom_line(size=1) + geom_point() +
+  facet_wrap(~Questions, dir="v", ncol=3, labeller = as_labeller(ads_labeller)) + 
+  scale_color_viridis_d() +
+  ggtitle("Comparison of How Often Youth See for cigarettes and e-cigarettes by Grades") +
+  theme(legend.position = "bottom")
+```
+
+
+## Race 
+
 
 ```{r, eval=FALSE}
 sum(data[5], na.rm = TRUE) # Not Hispanic or Latino
@@ -48,7 +177,7 @@ smoked_per_race = c(2522, 508, 267, 1523, 1502, 747, 2958, 503, 9882)
 race_df = data.frame(race_ethnicity, total_race_count, smoked_per_race)
 ```
 
-```{r}
+```{r, fig.width=10, fig.height=10}
 race_df <- race_df %>%
   mutate(percent_smoking = smoked_per_race / total_race_count) %>%
   arrange(percent_smoking)

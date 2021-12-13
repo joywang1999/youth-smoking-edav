@@ -1,5 +1,6 @@
 introduction
 data-sources
+national-youth-tobacco-survey-nyts
 data-transformation
 preprocessing
 missing-values
@@ -7,6 +8,7 @@ using-dataset-from-fivethirtyeight
 california-tobacco-health-assessment-tool-httpscthat.org.
 youth-smoking-data-set
 results
+advertisement
 race
 interactive-component
 conclusion

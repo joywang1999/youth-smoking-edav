@@ -42,13 +42,14 @@
 # [30] "How old were you when you first used chewing tobacco, snuff, or dip, even just a small amount?"                                                                                         
 # [31] "Have you ever been curious about using an e-cigarette?"                                                                                                                                 
 # [32] "Have you ever used an e-cigarette, even once or twice?"                                                                                                                                 
-# [33] "When you are using the Internet, how often do you see ads or promotions for cigarettes or other tobacco products?"                                                                      
-# [34] "When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for cigarettes or other tobacco products?"                                      
-# [35] "When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for cigarettes or other tobacco products?"
-# [36] "When you are using the Internet, how often do you see ads or promotions for e-cigarettes?"                                                                                              
-# [37] "When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for e-cigarettes?"                                                              
-# [38] "When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for e-cigarettes?"                        
-# [39] "How often do you see posts related to e-cigarettes when you go on social media (such as YouTube, Instagram, Snapchat, Twitter, or Facebook)?"                                           
+# [33] "How old were you when you first used an e-cigarette, even once or twice?"                                                                                                               
+# [34] "When you are using the Internet, how often do you see ads or promotions for cigarettes or other tobacco products?"                                                                      
+# [35] "When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for cigarettes or other tobacco products?"                                      
+# [36] "When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for cigarettes or other tobacco products?"
+# [37] "When you are using the Internet, how often do you see ads or promotions for e-cigarettes?"                                                                                              
+# [38] "When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for e-cigarettes?"                                                              
+# [39] "When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for e-cigarettes?"                        
+# [40] "How often do you see posts related to e-cigarettes when you go on social media (such as YouTube, Instagram, Snapchat, Twitter, or Facebook)?"                                                                                    
 
 
 library(tidyverse)
