@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Huynh, Tengteng Tao, Jinyu Wang" />
 
 
-<meta name="date" content="2021-12-13" />
+<meta name="date" content="2021-12-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -63,8 +63,8 @@
 <script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
 <link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
 <script src="libs/selectize-0.12.0/selectize.min.js"></script>
-<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -168,6 +168,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#advertisement"><i class="fa fa-check"></i><b>5.1</b> Advertisement</a></li>
 <li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#race"><i class="fa fa-check"></i><b>5.2</b> Race</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#smoking-habits"><i class="fa fa-check"></i><b>5.3</b> Smoking Habits</a></li>
+<li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#comparison-between-first-time-using-to-tobacco-products"><i class="fa fa-check"></i><b>5.4</b> Comparison Between First-time Using to Tobacco Products</a></li>
+<li class="chapter" data-level="5.5" data-path="results.html"><a href="results.html#tendency-to-use-cigarette"><i class="fa fa-check"></i><b>5.5</b> Tendency to Use Cigarette</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -211,6 +214,61 @@ We could clearly discover a trend that ads for e-cigarettes are increasing on th
 <h2><span class="header-section-number">5.2</span> Race</h2>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-32-1.png" width="960" /></p>
 <p>As we can see by the breakdown by race/ethnicity above, almost 1 in every 4 of the youth that identify as Cuban have tried smoking. The percentage of youth identifying as Cuban who have tried smoking is over twice as much as the percentage of youth who identify as Asian. The percentage of the youth who identify as Hispanic or Latino and have tried smoking is about 17%, which is greater than most other race/ethnicities other than American Indian or Alaska Native. Approxmately 1 in 5 of the youth who identity as American Indian or Alaska Native have tried smoking.</p>
+</div>
+<div id="smoking-habits" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Smoking Habits</h2>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-33-1.png" width="960" /><img src="finalproj_files/figure-html/unnamed-chunk-33-2.png" width="960" /></p>
+</div>
+<div id="comparison-between-first-time-using-to-tobacco-products" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Comparison Between First-time Using to Tobacco Products</h2>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-34-1.png" width="960" /></p>
+<p>The above are mosaic plots of years and responses for questions on the age first tried different tobacco products.</p>
+<p>From mosaic plots above, most of youth start using tobacco products during high school age (age of 14 to 17). It is also surprising that <code>8 years or younger</code> had an amount of contributes in starting traditional cigarettes and chewing tobacco, snuff, or dip in youth. Consider the reason that youth cannot purchase tobacco products legally by themselves, focuses on the source of tobacco products are very important. This may also related to cultural social factors with the analysis on Race from previous.</p>
+<p>Even with the stricter law in 2018, the pattern did not change much. Very few of them started at <code>19 years old or older</code>, the least among all groups, which means that they either never smoke in youth, or they start much early than 19 years old.</p>
+<p>Thus, to prevent youth smoking, the target group are among high school students or even younger, where youth were in rebellious stage.</p>
+</div>
+<div id="tendency-to-use-cigarette" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Tendency to Use Cigarette</h2>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-35-1.png" width="960" /></p>
+<p>The above plot are response to questions about tendency to smoking in 2020.
+Most of responses are <code>Definitely not</code>, since it made our plot long to read, we filter out 5439 that answered <code>Definitely not</code> in all 5 question.
+Here are reference to the questions in the plot above, this is to avoid confusion.</p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="86%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question Num</th>
+<th align="center">Actual Question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Q1</td>
+<td align="center">Do you think that you will try a cigarette soon?</td>
+</tr>
+<tr class="even">
+<td>Q2</td>
+<td align="center">Do you think that you will smoke a cigarette in the next year?</td>
+</tr>
+<tr class="odd">
+<td>Q3</td>
+<td align="center">If one of your best friends were to offer you a cigarette, would you smoke it?</td>
+</tr>
+<tr class="even">
+<td>Q4</td>
+<td align="center">Have you ever been curious about smoking a cigarette?</td>
+</tr>
+<tr class="odd">
+<td>Q5</td>
+<td align="center">Have you ever been curious about using an e-cigarette?</td>
+</tr>
+</tbody>
+</table>
+<p>We can see that more youth are definitely curious about tobacco products (as shown in last two questions), but they would not try them just by curiosity. Youth are knowing the danger about smoking, although many of them had self-controlled themselves from unknown, it is possible that we are reducing the presence of tobacco products in everyday lives, such as advertisement.</p>
+<p>As trending flavors of e-cigarette, the plot shows that many young people are getting interest in such new product (the height for <code>Probably yes</code> and <code>Definitely yes</code> are much larger than other questions). However, although their advertisement shows that e-cigarette can help quitting smoking, it is still an forbidden product that contains tobacco.</p>
 
 </div>
 </div>

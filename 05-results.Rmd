@@ -228,7 +228,7 @@ grouped_last_smoked %>%
 ```
 
 
-## Comparison Between Interests to Tobacco Products 
+## Comparison Between First-time Using to Tobacco Products 
 
 ```{r, fig.width=10, fig.height=20}
 library(ggmosaic)
@@ -243,7 +243,7 @@ levels <- c("8 years old or younger",
             "9 years old", "10 years old", "11 years old", "12 years old", "13 years old", "14 years old", 
             "15 years old", "16 years old", "17 years old", "18 years old", "19 years old or older")
 
-interest <- data %>%
+firsttime <- data %>%
   select(c(1, 16, 28, 30, 33)) %>%
   pivot_longer(-1, names_to="Questions", values_to="Response") %>% 
   filter(!grepl("I have never", Response)) %>% 
@@ -256,7 +256,7 @@ q <- c("How old were you when you first smoked a cigarette, even one or two puff
        "How old were you when you first used chewing tobacco, snuff, or dip, even just a small amount?", 
        "How old were you when you first used an e-cigarette, even once or twice?" )
 
-interest %>% 
+firsttime %>% 
   ggplot() +
   geom_mosaic(aes(x=product(Response, Year), fill=Response)) + 
   facet_wrap(~Questions, nrow = 4, dir="v") +
@@ -277,12 +277,59 @@ Thus, to prevent youth smoking, the target group are among high school students 
 
 
 
-## SOMETHING
+## Tendency to Use Cigarette
 
 
+```{r, fig.width=10, fig.height=20}
+library(parcoords)
+library(ggalluvial)
+
+# [23] "Have you ever been curious about smoking a cigarette?"                                                                                                                                  
+# [24] "Do you think that you will try a cigarette soon?"                                                                                                                                       
+# [25] "Do you think that you will smoke a cigarette in the next year?"                                                                                                                         
+# [26] "If one of your best friends were to offer you a cigarette, would you smoke it?"                                                                                                                    
+# [31] "Have you ever been curious about using an e-cigarette?"          
+
+levels <- c("Definitely not", "Probably not", "Probably yes", "Definitely yes")
+
+interest <- data %>% 
+  filter(Year == 2020) %>%
+  select(c(24, 25, 26, 23, 31)) %>% 
+  drop_na() %>%
+  rename(Q1=1, Q2=2, Q3=3, Q4=4, Q5=5) %>% 
+  filter( !(Q1 == "Definitely not" & Q2 == "Definitely not" & Q3 == "Definitely not" & Q4 == "Definitely not" & Q5 == "Definitely not") ) %>% 
+  group_by_all() %>%
+  summarise(freq = n(), .groups = "drop") %>% 
+  to_lodes_form(axes = 1:5) %>% 
+  mutate(stratum = factor(stratum, levels = levels))
+  
+interest %>%
+  ggplot(aes(x=x, stratum=stratum, alluvium=alluvium, y=freq)) +
+  geom_flow(aes(fill=stratum)) +
+  geom_stratum(width=1/2) + 
+  geom_text(stat="stratum", aes(label=after_stat(stratum))) + 
+  theme(legend.position = "bottom",
+        axis.title = element_blank(),
+        axis.text.y = element_blank())
+  
+```
+
+The above plot are response to questions about tendency to smoking in 2020.
+Most of responses are `Definitely not`, since it made our plot long to read, we filter out 5439 that answered `Definitely not` in all 5 question.
+Here are reference to the questions in the plot above, this is to avoid confusion. 
+
+| Question Num  | Actual Question                                                                |
+| ------------- |:------------------------------------------------------------------------------:|
+| Q1            | Do you think that you will try a cigarette soon?                               |
+| Q2            | Do you think that you will smoke a cigarette in the next year?                 |
+| Q3            | If one of your best friends were to offer you a cigarette, would you smoke it? |
+| Q4            | Have you ever been curious about smoking a cigarette?                          |
+| Q5            | Have you ever been curious about using an e-cigarette?                         |
 
 
+We can see that more youth are definitely curious about tobacco products (as shown in last two questions), but they would not try them just by curiosity. Youth are knowing the danger about smoking, although many of them had self-controlled themselves from unknown, it is possible that we are reducing the presence of tobacco products in everyday lives, such as advertisement. 
 
+As trending flavors of e-cigarette, the plot shows that many young people are getting interest in such new product (the height for `Probably yes` and `Definitely yes` are much larger than other questions). However, although their advertisement shows that e-cigarette can help quitting smoking, it is still an forbidden product that contains tobacco. 
 
 
 

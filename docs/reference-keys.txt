@@ -10,5 +10,8 @@ youth-smoking-data-set
 results
 advertisement
 race
+smoking-habits
+comparison-between-first-time-using-to-tobacco-products
+tendency-to-use-cigarette
 interactive-component
 conclusion
