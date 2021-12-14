@@ -207,7 +207,7 @@ As we can see by the breakdown by race/ethnicity above, almost 1 in every 4 of t
 
 
 ## Smoking Habits
-```{r}
+```{r, fig.width=10, fig.height=10}
 last_smoked <- na.omit(data[c(1,19)])
 
 grouped_last_smoked <- last_smoked %>%
