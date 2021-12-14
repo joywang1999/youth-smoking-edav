@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <title>Interactive Plot</title>
+        <script type="text/javascript" src="https://d3js.org/d3.v6.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+		<style type="text/css">
+			h1 {color:red;}		/* CSS styling */
+			p {color:blue;}
+		</style>
+
+	</head>
+
+	<body>
+
+		<select id="selectButton"> </select>
+
+		<div id="plot"></div>
+
+		<script>
+
+			var margin = {top: 20, right: 20, bottom: 30, left: 350},
+			    width = 1000 - margin.left - margin.right;
+			    height = 800 - margin.top - margin.bottom;
+
+			var x = d3.scaleLinear()
+			    .range([0, width]);
+
+			var y = d3.scaleBand()
+			    .range([height, 0]).padding(1);
+
+			var agecolor = d3.scaleOrdinal(d3.schemeSpectral[11])
+				.domain(["9 years old", "10 years old", "11 years old", "12 years old", "13 years old", "14 years old", 
+                "15 years old", "16 years old", "17 years old", "18 years old", "19 years old or older"]);
+
+			var sexcolor = d3.scaleOrdinal([d3.color("orange"), d3.color("purple")]);
+			var gradecolor = d3.scaleOrdinal(d3.schemeAccent)
+				.domain(["6th", "7th", "8th", "9th", "10th", "11th", "12th", "Ungraded or other grade"]);
+
+			var agelegend = d3.legendColor().scale(agecolor);
+			var sexlegend = d3.legendColor().scale(sexcolor);
+			var gradelegend = d3.legendColor().scale(gradecolor);
+
+			// define the line
+			var valueline = d3.line()
+			    .x(function(d) { return x(d.date); })
+			    .y(function(d) { return y(d.close); });
+
+			var svg = d3.select("#plot").append("svg")
+			    .attr("width", width + margin.left + margin.right)
+			    .attr("height", height + margin.top + margin.bottom)
+			  	.append("g")
+			    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			svg.call(d3.zoom()
+				.extent([[0,0], [width, height]])
+				.scaleExtent([1,8])
+				.on("zoom", zoomed));
+
+			function zoomed({transform}) {
+				g.attr("transform", transform);
+			}
+
+			var nodes = [];
+			d3.csv("../data/nyts_quittime.csv").then(function(data) {
+
+				var groups = ["Age", "Sex", "Grade"];
+
+				data.forEach(function(d) {
+					d.radius = +d.radius;
+					d.theta = +d.theta;
+					d.x = +d.x;
+					d.y = +d.y;
+				});
+
+				// console.log(data)
+
+				d3.select("#selectButton") 
+						.selectAll("myOptions")
+						.data(groups)
+						.enter().append("option")
+						.text(function(d) { return d; })
+						.attr("value", function(d) { return d; });
+
+
+				x.domain(d3.extent(data, function(d) { return d.Year; }));
+				// y.domain(d3.extent(data, function(d) { return d.QuitTime; }));
+				// y.domain(data.map(function (d) {return d.QuitTime; }));
+				y.domain(["Earlier today",
+									"Not today but sometime during past 7 days",
+									"Not during the past 7 days but sometime during the past 30 days",
+									"Not during the past 30 days but sometime during the past 6 months",
+									"Not during the past 6 months but sometime during the past year",
+									"1 to 4 years ago",
+									"5 or more years ago"]);
+
+				// var clip = svg.append("defs").append("svg:clipPath")
+    //         .attr("id", "clip")
+    //         .append("svg:rect")
+    //         .attr("width", width + 10)
+    //         .attr("height", height + 10)
+    //         .attr("x", -10) 
+    //         .attr("y", -10); 
+
+
+    //     var scatter = svg.append("g")
+    //     		.attr("id", "scatterplot")
+    //     		.attr("clip-path", "url(#clip)");
+
+			  // Add the scatterplot
+			  svg.selectAll("circle")
+			      .data(data)
+			    .enter().append("circle")
+			      .attr("r", 1)
+			      .attr("cx", function(d) { return x(d.Year) + 10*d.x; })
+			      .attr("cy", function(d) { return y(d.QuitTime) + 10*d.y; })
+			      .style("fill", function(d) { return agecolor(d.Age); });
+
+			  // scatter.selectAll(".dot")
+			  // 	.data(data)
+			  //   .enter().append("circle")
+			  //     .attr("r", 1)
+			  //     .attr("cx", function(d) { return x(d.Year) + 10*d.x; })
+			  //     .attr("cy", function(d) { return y(d.QuitTime) + 10*d.y; })
+			  //     .style("fill", function(d) { return agecolor(d.Age); });
+
+			  // Add the X Axis
+			  svg.append("g")
+			      .attr("transform", "translate(0," + height + ")")
+			      .call(d3.axisBottom(x).ticks(5));
+
+			  // Add the Y Axis
+			  svg.append("g")
+			      .call(d3.axisLeft(y));
+
+			  svg.append("g")
+			  		.attr("class", "legend")
+			  		.attr("transform", "translate(500,10)")
+			  		.call(agelegend);
+
+			  // console.log(color.domain());
+
+			  d3.select("#selectButton").on("change", function(event, d) {
+			  	const selectedOptions = d3.select(this).property("value");
+
+			  	console.log(selectedOptions);
+			  	if (selectedOptions == "Age") {
+			  		svg.selectAll("circle")
+			  				.transition()
+			  				.duration(100)
+			  				.style("fill", function(d) { return agecolor(d.Age); });
+			  		svg.select("g.legend")
+			  			.call(agelegend);
+			  	} else if (selectedOptions == "Sex") {
+			  		svg.selectAll("circle")
+			  				.transition()
+			  				.duration(100)
+			  				.style("fill", function(d) { return sexcolor(d.Sex); });
+			  		svg.select("g.legend")
+			  			.call(sexlegend);
+			  	} else if (selectedOptions == "Grade") {
+			  		svg.selectAll("circle")
+			  				.transition()
+			  				.duration(100)
+			  				.style("fill", function(d) { return gradecolor(d.Grade); });
+			  		svg.select("g.legend")
+			  		  .call(gradelegend);
+			  	}
+
+			  })
+
+			  // var brush = d3.brush().extent([[0, 0], [width, height]]).on("end", brushended),
+     //        idleTimeout,
+     //        idleDelay = 350;
+
+     //    scatter.append("g")
+     //        .attr("class", "brush")
+     //        .call(brush);
+
+     //    function brushended() {
+
+     //        var s = d3.event.transform;
+     //        if (!s) {
+     //            if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
+     //            x.domain(d3.extent(data, function (d) { return d.x; })).nice();
+     //            y.domain(d3.extent(data, function (d) { return d.y; })).nice();
+     //        } else {
+                
+     //            x.domain([s[0][0], s[1][0]].map(x.invert, x));
+     //            y.domain([s[1][1], s[0][1]].map(y.invert, y));
+     //            scatter.select(".brush").call(brush.move, null);
+     //        }
+     //        zoom();
+     //    }
+
+     //    function idled() {
+     //        idleTimeout = null;
+     //    }
+
+     //    function zoom() {
+
+     //        var t = scatter.transition().duration(750);
+     //        svg.select("#axis--x").transition(t).call(xAxis);
+     //        svg.select("#axis--y").transition(t).call(yAxis);
+     //        scatter.selectAll("circle").transition(t)
+     //        .attr("cx", function (d) { return x(d.x); })
+     //        .attr("cy", function (d) { return y(d.y); });
+     //    }
+
+			});
+
+			// console.log(data);
+
+			// console.log(nodes);
+
+
+		</script>
+
+	</body>
+
+</html>

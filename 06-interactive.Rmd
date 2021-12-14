@@ -1,3 +1,8 @@
 # Interactive component
 
+Here is our interactive plot about how many people quit smoking by coloring different groups. 
 
+- You could select different group for coloring on the top left corner.
+- You could change zoom and drag to see the color in different clusters.
+
+<iframe src="interactive/interactive_plot.html" width="960" height="600"></iframe>
