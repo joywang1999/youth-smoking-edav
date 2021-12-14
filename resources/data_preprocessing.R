@@ -97,7 +97,7 @@ for (y in years) {
   
   colnames(selected_df) <- columns
   
-  # selected_df <- mutate_all(selected_df, function(x) as.character(x))
+  selected_df <- mutate_all(selected_df, function(x) as.character(x))
   
   for (col in columns[2:length(columns)]) {
     for (c in (factoring %>% filter(Year==y))$Code) {
@@ -110,4 +110,4 @@ for (y in years) {
 
 final <- mutate_all(final, function(x) as.factor(x))
 
-write_excel_csv(final, "data/nyts_grouped.csv")
+write_csv(final, "data/nyts_grouped.csv")
