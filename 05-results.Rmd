@@ -85,6 +85,9 @@ We could clearly discover a trend that ads for e-cigarettes are increasing on th
 Looking at the TV or streaming services plot, we can also relate the decreasing of tobacco/e-cigarettes ads to the legislation that legal age for tobacco products were raised from 18 to 21 years old in 2019. 
 
 
+
+Another perspective we want to focus on is the relationship between ages, grades, and how often those youth see ads about tobacco products' ads. As we all know, people’s resistance to some attractive things will also increase as people grow. Thus, if a teenager sees too much promotion about cigarettes when he was even younger, it will be no surprise that this teenager started smoking at a very young age. So, we made those plots that describe the relationship between the age or grade and how often they see promotions. 
+
 ```{r, fig.width=10, fig.height=10}
 
 age_levels <- c("9 years old", "10 years old", "11 years old", "12 years old", "13 years old", "14 years old", 
@@ -136,6 +139,12 @@ age_grade_data %>%
   ggtitle("Comparison of How Often Youth See for cigarettes and e-cigarettes by Grades") +
   theme(legend.position = "bottom")
 ```
+
+The first graph here is ages vs. how often they see promotions. Let us first analyze traditional tobacco products and cigarettes, which is the upper part of this graph. Based on those graphs, we can clearly see that around 37 percent of 9 years old children always saw promotions for tobacco products through the internet. This number is terrifying because if a child has been affected by those tobacco promotions since nine years old, it will be very common for this child to become a smoking youth person. For the store, it looks like there are just constant promotions hung in those stores, and no matter who entered the store will be affected by it. This also can be shown through the plot. Based on the plot, for all ages’ people, around 15 to 30 percent of total popularity always saw promotions for tobacco products. Similarly, TV and streaming services here still affect the least amount of people. Those numbers are also decreasing, which can be interpreted as people who work for TV or streaming service are taking this seriously and trying to control the ads about tobacco products. 
+
+Then, we switch our view to e-cigarettes, which are the lower part of the graph. Based on the graph, we can see that, no matter through which way, a large number of nine years old child always see the promotion of e-cigarettes. The promotion for e-cigarettes reached its peak in 2017 and there are around 30 to 40 percent of nine-year-old children always see those ads from both the internet, convenience stores, and TV. Although this number decreased a lot in 2020, those e-cigarettes’ promotions still affected a lot of young teenagers and children.
+
+Now, let us look at the relationship between grades and promotions of tobacco products. The interesting thing here is that a group of people is labeled as ungraded, and around 40 percent of people in this group always see promotions for both cigarettes and e-cigarettes. As we all know, the grade should be related to ages, which means ungraded teenagers may have dropped their school or their family can not afford the education. It is obvious that a child or teenager without enough education will always be affected by smoking ads, since they may spend too much time on the internet, TV shows instead of school. Those children and teenagers are easier to smoke when they become youth adult.
 
 
 ## Race 
