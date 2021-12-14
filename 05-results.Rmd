@@ -206,6 +206,79 @@ race_bar
 As we can see by the breakdown by race/ethnicity above, almost 1 in every 4 of the youth that identify as Cuban have tried smoking. The percentage of youth identifying as Cuban who have tried smoking is over twice as much as the percentage of youth who identify as Asian. The percentage of the youth who identify as Hispanic or Latino and have tried smoking is about 17%, which is greater than most other race/ethnicities other than American Indian or Alaska Native. Approxmately 1 in 5 of the youth who identity as American Indian or Alaska Native have tried smoking. 
 
 
+## Smoking Habits
+
+```{r, fig.width=10, fig.height=10}
+last_smoked <- na.omit(data[c(1,19)])
+
+grouped_last_smoked <- last_smoked %>%
+  group_by(Year, `When was the last time you smoked a cigeratte, even one or two puffs? (Please choose the first answer that fits)`) %>% 
+  summarise(count=n(), .groups = "drop") 
+
+grouped_last_smoked %>%
+  ggplot(aes(x=`When was the last time you smoked a cigeratte, even one or two puffs? (Please choose the first answer that fits)`, y = count)) +
+  geom_bar(stat = 'identity') +
+  theme(axis.text.x = element_text(angle = 45, hjust=1))
+
+grouped_last_smoked %>%
+  ggplot(aes(x=`When was the last time you smoked a cigeratte, even one or two puffs? (Please choose the first answer that fits)`, y = count)) +
+  geom_bar(stat = 'identity') +
+  facet_wrap(~Year) +
+  theme(axis.text.x = element_text(angle = 45, hjust=1))
+```
+
+
+## Comparison Between Interests to Tobacco Products 
+
+```{r, fig.width=10, fig.height=20}
+library(ggmosaic)
+library(grid)
+
+# [16] "How old were you when you first smoked a cigarette, even one or two puffs?"  
+# [28] "How old were you when you first smoked a cigar, cigarillo, or little cigar, even one or two puffs?"   
+# [30] "How old were you when you first used chewing tobacco, snuff, or dip, even just a small amount?"     
+# [33] "How old were you when you first used an e-cigarette, even once or twice?"     
+
+levels <- c("8 years old or younger",
+            "9 years old", "10 years old", "11 years old", "12 years old", "13 years old", "14 years old", 
+            "15 years old", "16 years old", "17 years old", "18 years old", "19 years old or older")
+
+interest <- data %>%
+  select(c(1, 16, 28, 30, 33)) %>%
+  pivot_longer(-1, names_to="Questions", values_to="Response") %>% 
+  filter(!grepl("I have never", Response)) %>% 
+  # mutate(Response = ifelse(grepl("I have never", Response), "Never", Response)) %>% 
+  mutate(Response = factor(Response, levels = levels)) %>% 
+  drop_na()
+
+q <- c("How old were you when you first smoked a cigarette, even one or two puffs?",
+       "How old were you when you first smoked a cigar, cigarillo, or little cigar, even one or two puffs?",
+       "How old were you when you first used chewing tobacco, snuff, or dip, even just a small amount?", 
+       "How old were you when you first used an e-cigarette, even once or twice?" )
+
+interest %>% 
+  ggplot() +
+  geom_mosaic(aes(x=product(Response, Year), fill=Response)) + 
+  facet_wrap(~Questions, nrow = 4, dir="v") +
+  theme_bw()
+  
+
+
+
+```
+
+The above are mosaic plots of years and responses for questions on the age first tried different tobacco products. 
+
+From mosaic plots above, most of youth start using tobacco products during high school age (age of 14 to 17). It is also surprising that `8 years or younger` had an amount of contributes in starting traditional cigarettes and chewing tobacco, snuff, or dip in youth. Consider the reason that youth cannot purchase tobacco products legally by themselves, focuses on the source of tobacco products are very important. This may also related to cultural social factors with the analysis on Race from previous.
+
+Even with the stricter law in 2018, the pattern did not change much. Very few of them started at `19 years old or older`, the least among all groups, which means that they either never smoke in youth, or they start much early than 19 years old. 
+
+Thus, to prevent youth smoking, the target group are among high school students or even younger, where youth were in rebellious stage. 
+
+
+
+## SOMETHING
+
 
 
 
