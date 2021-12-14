@@ -10,6 +10,5 @@ youth-smoking-data-set
 results
 advertisement
 race
-smoking-habits
 interactive-component
 conclusion

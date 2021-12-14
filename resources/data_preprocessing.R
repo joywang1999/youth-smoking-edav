@@ -8,50 +8,6 @@
 ################################################################################
 
 
-# some code are different between years, need refactor
-
-# [1] "Year"                                                                                                                                                                                   
-# [2] "How old are you?"                                                                                                                                                                       
-# [3] "What is your sex?"                                                                                                                                                                      
-# [4] "What grade are you in?"                                                                                                                                                                 
-# [5] "No, not of Hispanic, Latino, Latina or Spanish origin: Are you Hispanic, Latino, Latina, or of Spanish origin? (Select one or more)"                                                    
-# [6] "Yes, Mexican, Mexican American, Chicano, or Chicana: Are you Hispanic, Latino, Latina, or of Spanish origin? (Select one or more)"                                                      
-# [7] "Yes, Puerto Rican: Are you Hispanic, Latino, Latina, or of Spanish origin? (Select one or more)"                                                                                        
-# [8] "Yes, Cuban: Are you Hispanic, Latino, Latina, or of Spanish origin? (Select one or more)"                                                                                               
-# [9] "Yes, Another Hispanic, Latino, Latina, or Spanish origin: Are you Hispanic, Latino, Latina, or of Spanish origin? (Select one or more)"                                                 
-# [10] "American Indian or Alaska Native: What race or races do you consider yourself to be? (Select one or more)"                                                                              
-# [11] "Asian: What race or races do you consider yourself to be? (Select one or more)"                                                                                                         
-# [12] "Black or African American: What race or races do you consider yourself to be? (Select one or more)"                                                                                     
-# [13] "Native Hawaiian or Other Pacific Islander: What race or races do you consider yourself to be? (Select one or more)"                                                                     
-# [14] "White: What race or races do you consider yourself to be? (Select one or more)"                                                                                                         
-# [15] "Have you ever smoked a cigarette, even one or two puffs?"                                                                                                                               
-# [16] "How old were you when you first smoked a cigarette, even one or two puffs?"                                                                                                             
-# [17] "About how many cigarettes have you smoked in your entire life?"                                                                                                                         
-# [18] "During the past 30 days, on how many days did you smoke cigarettes?"                                                                                                                    
-# [19] "When was the last time you smoked a cigeratte, even one or two puffs? (Please choose the first answer that fits)"                                                                       
-# [20] "During the past 30 days, on the days you smoked, about how many cigarettes did you smoke per day? A pack usually has 20 cigarettes in it."                                              
-# [21] "During the past 30 days, what brand of cigarettes did you usually smoke?"                                                                                                               
-# [22] "Menthol cigarettes are cigarettes that taste like mint. During the past 30 days, were the cigarettes that you usually smoked menthol?"                                                  
-# [23] "Have you ever been curious about smoking a cigarette?"                                                                                                                                  
-# [24] "Do you think that you will try a cigarette soon?"                                                                                                                                       
-# [25] "Do you think that you will smoke a cigarette in the next year?"                                                                                                                         
-# [26] "If one of your best friends were to offer you a cigarette, would you smoke it?"                                                                                                         
-# [27] "Have you ever smoked a cigar, cigarillo, or little cigar, even one or two puffs?"                                                                                                       
-# [28] "How old were you when you first smoked a cigar, cigarillo, or little cigar, even one or two puffs?"                                                                                     
-# [29] "Have you ever used chewing tobacco, snuff, or dip, even just a small amount?"                                                                                                           
-# [30] "How old were you when you first used chewing tobacco, snuff, or dip, even just a small amount?"                                                                                         
-# [31] "Have you ever been curious about using an e-cigarette?"                                                                                                                                 
-# [32] "Have you ever used an e-cigarette, even once or twice?"                                                                                                                                 
-# [33] "How old were you when you first used an e-cigarette, even once or twice?"                                                                                                               
-# [34] "When you are using the Internet, how often do you see ads or promotions for cigarettes or other tobacco products?"                                                                      
-# [35] "When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for cigarettes or other tobacco products?"                                      
-# [36] "When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for cigarettes or other tobacco products?"
-# [37] "When you are using the Internet, how often do you see ads or promotions for e-cigarettes?"                                                                                              
-# [38] "When you go to a convenience store, supermarket, or gas station, how often do you see ads or promotions for e-cigarettes?"                                                              
-# [39] "When you watch TV or streaming services (such as Netflix, Hulu, or Amazon Prime), or go to the movies, how often do you see ads or promotions for e-cigarettes?"                        
-# [40] "How often do you see posts related to e-cigarettes when you go on social media (such as YouTube, Instagram, Snapchat, Twitter, or Facebook)?"                                                                                    
-
-
 library(tidyverse)
 library(readxl)
 

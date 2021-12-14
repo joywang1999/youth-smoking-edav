@@ -7,6 +7,7 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+Nowadays, as we noticed, more and more youth-adult, teenagers, and even children are getting used to smoke. As we all know, smoking is not a healthy habit, especially for children and teenagers. Accordingly, we are curious why youth smokers have increased with all other people paying more and more attention to their health. Thus, to study this problem, we found some interesting data sets. We found a national youth tobacco survey on the Centers for Disease Control and Prevention official website. This survey has been taken annually since 1999, and we decided to focus on the data from 2016 to 2020. Each year's surveys have around 150 questions covered from the participant's race, age, gender to their daily smoking habit. Since every year’s surveys have several different questions, we pick up 40 common questions for all five years and focus on several reasons which we believe are related to the youth smoking problem.
 
 There are three main questions we are interested in pursuing:
 
